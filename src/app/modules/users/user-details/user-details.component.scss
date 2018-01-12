@@ -1,0 +1,44 @@
+.profile-container {
+    position: relative;
+}
+
+.profile-container img {
+    width: 160px;
+    height: 160px;
+}
+
+.profile-container .edit-profile {
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.48);
+    line-height: 40px;
+    width: 98%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.action-btn {
+    margin: 20px 0px;
+}
+
+.action-btn button {
+    font-weight: 500;
+    background-color: #dddddd;
+}
+
+.action-btn button[type="submit"] {
+    background-color: #3fbbdd;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.profile-content {
+    background-color: #fff;
+    height: 350px;
+    padding: 20px;
+}
+.profile-content .row{
+    margin-bottom: 30px;
+}

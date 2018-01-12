@@ -1,0 +1,74 @@
+<section class="adduser-section">
+  <div class="container-fluid">
+    <form #f="ngForm" (ngSubmit)="addNewUser(f.valid)">
+      <div class="row text-right action-btn">
+        <div class="col-md-12">
+          <button type="submit" class="btn">Submit</button>
+          <button type="button" class="btn" routerLink="/users">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <div class="profile-container">
+            <img [src]="userProfile">
+            <div class="edit-profile" (click)="triggerProfile()">Change Picture</div>
+          </div>
+          <input type="file" accept="image/*" id="profile" style="display: none" (change)="profileUpload($event)">
+        </div>
+        <div class="col-md-10">
+          <div class="profile-content">
+            <div class="row">
+              <div class="col">
+                <label for="firstname">First Name</label>
+                <input type="text" placeholder="First Name" class="form-control form-control-sm" name="firstName" #firstName="ngModel" [(ngModel)]="user.firstName">
+              </div>
+              <div class="col">
+                <label for="lastname">Last Name</label>
+                <input type="text" placeholder="Last Name" class="form-control form-control-sm" name="lastName" #lastName="ngModel" [(ngModel)]="user.lastName">
+              </div>
+              <div class="col">
+                <label for="email">Email</label>
+                <input type="email" placeholder="Email" class="form-control form-control-sm" name="email" #email="ngModel" [(ngModel)]="user.email"
+                  required>
+                <label class="text-danger" [hidden]="email.valid || (email.pristine && ! f.submitted)">Email is required</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="phone">Phone</label>
+                <input type="text" placeholder="Phone" name="phone" class="form-control form-control-sm" #phone="ngModel" [(ngModel)]="user.phone"
+                  required>
+                <label class="text-danger" [hidden]="phone.valid || (phone.pristine && ! f.submitted)">Phone is required</label>
+              </div>
+              <div class="col">
+                <label for="role">Role</label>
+                <input type="text" placeholder="Role" name="role" class="form-control form-control-sm" #role="ngModel" [(ngModel)]="user.role">
+              </div>
+              <div class="col">
+                <label for="access">Access</label>
+                <input type="text" placeholder="Access" name="access" class="form-control form-control-sm" #access="ngModel" [(ngModel)]="user.access">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="status">Status</label>
+                <select class="form-control form-control-sm" name="activeStatus" #activeStatus="ngModel" [(ngModel)]="user.activeStatus">
+                  <option value="active">Active</option>
+                  <option value="deactive">Deactive</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="clientAccess">Client Access</label>
+                <input type="text" placeholder="Client Access" name="clientAccess" class="form-control form-control-sm" #clientAccess="ngModel"
+                  [(ngModel)]="user.clientAccess">
+              </div>
+              <div class="col">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

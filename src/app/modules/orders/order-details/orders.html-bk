@@ -1,0 +1,516 @@
+
+<header class="container-fluid no-gutter" id="nav-section">
+    <div class="row">
+      <div class="col-md-2 d-flex flex-row p-3 border-right">
+          <img src="../../../../assets/login_logo.png" alt="Logo" class="d-block img-fluid">
+      </div>
+      <div class="col-md-10 d-flex flex-row justify-content-end">
+        <div class="mr-auto align-self-center h4">{{title}}</div>
+        <div class="border-left d-flex flex-row p-2">
+          <i class="m-1 fa fa-comment-o fa-2x align-self-center"></i>
+        </div>
+        <div class="border-left d-flex flex-row p-2">
+          <i class="m-1 fa fa-bell-o fa-2x align-self-center"></i>
+        </div>
+        <div class="border-left d-flex flex-row p-2">
+          <i class="m-1 fa fa-user-o fa-2x align-self-center"></i>
+        </div>
+      </div>
+  
+    </div>  
+  </header>
+  <div class="container-fluid no-gutter">
+    <div class="row">
+      <div class="col-md-2 d-flex flex-column p-3"  id="menu-section">
+          <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link disabled" routerLink="/login" routerLinkActive="active"><i class="fa fa-laptop mr-3"></i>  <span >Dashboard</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/orders" routerLinkActive="active"><i class="fa fa-laptop mr-3"></i> <span >Orders</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/clients" routerLinkActive="active"><i class="fa fa-user-o mr-3"></i><span class="ml-1">Client</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" routerLink="/candidates" routerLinkActive="active"><i class="fa fa-user mr-3"></i><span class="ml-1">Candidate</span></a>
+              </li>
+              <!-- <li class="nav-item">
+                  <a class="nav-link disabled" routerLink="/login" routerLinkActive="active"><i class="fa fa-cog mr-3"></i>Job Configuration</a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link disabled" routerLink="/login" routerLinkActive="active"><i class="fa fa-users mr-3"></i><span>Users</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" routerLink="/login" routerLinkActive="active"><i class="fa fa-question mr-3"></i><span class="ml-2">Help</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link disabled" routerLink="/login" routerLinkActive="active"><i class="fa fa-sliders mr-3"></i><span class="ml-1">Settings</span></a>
+                </li>
+            </ul>
+  
+      </div>
+      <div class="col-md-10 d-flex flex-column p-3" id="main-section">
+      <form #f="ngForm" (ngSubmit)="save(f.value)">
+   
+    <!-- POSTS -->
+    <section id="cangidate-grid">
+      <div class="client-id">
+        <div class="row " *ngIf="id != 'new' && id !=''">
+	        <div class="col-md-4">
+	          <ul>
+	            <li>Order Id</li>
+	            <li>{{order?._id}}</li>
+	            <li>Client Name</li>
+	            <li>BMG Capetown</li>
+	            <li>Client Id</li>
+	            <li>{{order?.cli_Id}}</li>
+
+	          </ul>
+	        </div>
+	        <div class="col-md-3">
+	          <ul>
+	            <li>Role:</li>
+	            <li>Receptionist</li>
+	            <li>Duratin:</li>
+	            <li>07 Oct-30Oct</li>
+	            <li>Amount Paid:</li>
+	            <li>R560</li>
+	          </ul>
+	        </div>
+	        <div class="col-md-4">
+	          <ul>
+	            <li>No of Candidates:</li>
+	            <li>4</li>
+	            <li>Candidates Requested:</li>
+	            <li>2</li>
+	            <li>Candidates Assigned:</li>
+	            <li>2</li>
+	          </ul>
+	        </div>
+	        <div class="col-md-1 next-cancel ">
+	          <button class="next" *ngIf="!currentTab" (click)="currentTab = true">Next</button>
+            <button class="next" type="submit" *ngIf="currentTab">Submit</button>
+	          <button routerLink="/orders">cancel</button>
+	        </div>
+
+        </div>
+        <div class="row " *ngIf="id=='new'">
+        	<div class="col-md-12 next-cancel new-order">
+	          <button class="next pull-right">Submit</button>
+	        </div>
+        </div>
+      </div>
+    </section>
+    <section id="cangidate-order">
+    	
+	     <div class="tab-button" *ngIf="id != 'new' && id !=''">    
+	          <ul>
+	            <li><button (click)="currentTab = false" class="next">Order Details</button>
+	            <li><button (click)="currentTab = true" >Candidates</button>
+	          </ul>
+	      </div>
+
+	    <div class="cangidate-order-section" [hidden]="currentTab">
+	      
+	      <div class="row">
+	        <div class="order-detais-section">
+	        <div class="row">
+	          <div class="col-md-2">Job role</div>
+	          	<div class="col-md-3">
+	          		<div class="form-group" >
+	          			<input 
+	          				name="roleTitle" [(ngModel)]="order.roleTitle" type="text" #roleTitle="ngModel"
+	          				 id="roleTitle" placeholder="Receptionist"/>
+	          			
+	          		</div>
+	          	</div>
+	          	<div class="col-md-3 text-center">Skillest</div>
+	          	<div class="col-md-4 padding-left">
+	          		<div class="form-group" >
+	          			<input 
+	          				[(ngModel)]="order.skillsets"
+	          				type="text"  
+	          				name="skillsets" 
+	          				placeholder="Typewriting,communication">
+	          			
+	          	</div>
+	        </div>
+	        <div class="row">
+	          <div class="col-md-2">Description</div>
+	          	<div class="col-md-10 padding-left">
+	          		<div class="form-group" >
+	          			<textarea 
+	          				[(ngModel)]="order.description"
+	          				name="description" 
+	          				placeholder="To execute the duties pertaining to the reception and the switch board efficiently with pride and dignity">
+	          			</textarea>
+	          			
+	          		</div>
+	          	</div>  
+	        </div>
+	        </div>
+	        <div _ngcontent-c1="" class=" order-details-note">
+	           <p _ngcontent-c1="">Note:Basic terms and conditions will be added automatically</p>
+	        </div>
+
+	        <div class="row">
+	          <div class="col-md-6">
+	            <ul class="order-description">
+	              <li>How Many?</li>
+	              <li>
+	              	<div class="form-group" >
+	              		<input 
+	              			[(ngModel)]="order.o_count"
+	              			type="text" 
+	              			name="o_count" 
+	              			placeholder="1">
+	              		
+	              	</div>
+	              	</li>
+	              <li>What Day?</li>
+	              <li>
+	              	<div class="form-group" >
+	              		<input 
+	              			type="text" 
+	              			name="daysOfJob" 
+	              			placeholder="wednesday">
+	              		
+	              	</div>
+	              </li>
+	              <li>Pay Scale</li>
+	              <li>
+	              	<div class="form-group" >
+		              	<input 
+		              		[(ngModel)]="order.o_pay_scale"
+		              		type="text" 
+		              		name="o_pay_scale" 
+		              		placeholder="R67/hr">
+		              	
+	              	</div>
+	              </li>
+	            </ul>
+	          </div>
+	          <div class="col-md-6 time-duration">
+	            <ul class="order-description-right">
+	              <li class="text-center">Duration</li>
+	              <li>
+	                  <div class="form-group" >
+	                  	<input 
+	                  		[(ngModel)]="order.jobStartDate"
+	                  		type="text" 
+	                  		placeholder="07 oct" 
+	                  		name="jobStartDate"> --
+	                  	<input 
+	                  		[(ngModel)]="order.jobEndDate"
+	                  		type="text" 
+	                  		#skills="ngModel"
+	                  		placeholder="30 0ct" 
+	                  		name="jobEndDate">
+	                  	
+	                  </div>
+	              </li>
+	              <li class="text-center">Time</li>
+	              <li>
+	                  <div class="form-group" >
+	                  	<input 
+	                  		[(ngModel)]="order.startTime"
+	                  		type="text" 
+	                  		placeholder="08:00" 
+	                  		name="startTime"> --	                  
+	                  	<input 
+	                  		[(ngModel)]="order.endTime"
+	                  		type="text" 
+	                  		placeholder="16:00" 
+	                  		name="endTime">
+	                  	
+	                  </div>
+	              </li>
+	              <li class="text-center">Location</li>
+	              <li>
+	              	<div class="form-group" >
+	              		<select 
+	              			[(ngModel)]="order.j_loc_Title"
+	              			name="j_loc_Title"
+	              			id="sel1" 
+	              			class="form-control" >
+	              			<option>Select</option>
+	                    <option>Headquarters</option>
+	                    <option>Headquarters 2</option>
+	                  </select>
+	                
+	                </div>
+	              </li>
+	            </ul>
+	          </div>
+	          <div class="text-right link-right"><a class="new-link"><i><i class="fa fa-plus-circle" aria-hidden="true"></i></i>Add new link</a></div>
+	        </div>
+	        <!-- Additonal section -->
+	      <div _ngcontent-c1="" class=" order-details-note">
+	           <p _ngcontent-c1="">Note:Basic terms and conditions will be added automatically</p>
+	        </div>
+	        <div class="row">
+	          <div class="col-md-6">
+	            <ul class="order-description">
+	              <li>Proximity</li>
+	              <li>
+	              		<div class="form-group" >
+		              		<select 
+		              			[(ngModel)]="order.o_max_radius"
+		              			name="proximity"
+		              			id="sel1" 
+		              			class="form-control" >
+		                      <option>1</option>
+		                      <option>2</option>
+		                      <option>4</option>
+		                      <option>6</option>
+		                      <option>8</option>
+		                      <option>10</option>
+		                      <option>12</option>
+		                  </select>
+		                  
+	                  </div>
+	              </li>
+	              <li>Pay Scale</li>
+	              <li>
+	              		<div class="form-group">
+	              			<input 
+	              				name="a_pay_scale"
+	              				type="text" 
+	              				placeholder="R67/hr">
+	              			
+	              		</div>	
+	              </li>
+	              <li>Previously Hired</li>
+	              <li>
+	              		<div class="form-group" >
+		              		<select 
+		              				[(ngModel)]="order.previouslyHired"
+		              				name="previouslyHired"
+		              				class="form-control" 
+		              				id="sel1" >
+		                      <option value="true">Yes</option>
+		                      <option value="false">No</option>
+		                  	</select>
+		                  
+	                  </div>
+	              </li>
+	            </ul>
+	          </div>
+	          <div class="col-md-6 time-duration">
+	            <ul class="order-description-right">
+	              <li class="text-center">Year Of Experience</li>
+	              <li>
+	              	<div class="form-group" >
+		                  <select 
+		                  	[(ngModel)]="order.o_min_experience"
+		                  	name="years_experience"
+		                  	class="form-control" 
+		                  	id="sel1" >
+		                    <option value="2">2</option>
+		                    <option value="3">3</option>
+		                    <option value="4">4</option>
+		                    <option value="5">5</option>
+		                    <option value="6">6</option>
+		                  </select>
+		                  
+	                  </div>
+	              </li>
+	              <li class="text-center">Language</li>
+	              <li>
+	              		<div class="form-group" >
+		                  <select 
+		                  		[(ngModel)]="order.o_preferred_languages"	
+		                  		name="o_preferred_languages" 
+		                  		id="sel1"
+		                  		class="form-control" >
+		                      <option value="German">German</option>
+		                      <option value="Afrikaan">Afrikaan</option>
+		                      <option value="French">French</option>
+		                      <option value="Dutch">Dutch</option>
+		                  </select>
+	                  </div>
+	              </li>
+	            </ul>
+	          </div>
+	        </div>
+	        <!-- end Additional section -->
+	        <!-- Questionnaire -->
+	        <div _ngcontent-c1="" class=" order-details-note">
+	           <p _ngcontent-c1="">Note:Basic terms and conditions will be added automatically</p>
+	        </div>
+	        <div class="row">
+	          <div class="col-md-3">Question for client</div>
+	          <div class="col-md-9 padding-left">
+	          	<div class="form-group" >
+	            	<textarea 
+	            		name="question_of_client" 
+	            		placeholder="Do you have any prior work experience?"></textarea>
+	            	
+	            </div>
+	          </div>
+	        </div>
+	        <div class="row">
+	          <div class="col-md-3">Question for candiate</div>
+	          <div class="col-md-9 padding-left">
+	          	<div class="form-group" >
+	          		<textarea 
+	          			name="question_of_candidate"
+	          			placeholder="Do you have any prior work experience?"></textarea>
+	          		
+	          	</div>
+	          </div>
+	        </div>
+	         <div class="text-right link-right"><a class="new-link"><i><i class="fa fa-plus-circle" aria-hidden="true"></i></i>Add a new Location</a></div>
+	        <!-- end Questionnaire -->
+	        <!-- Additional Term And condition -->
+	      
+	        <!-- End Additional Term And condition -->
+	        <!-- Basic Term and condition -->
+	        <div class=" order-details-note">
+	           <p>Note:Basic terms and conditions will be added automatically</p>
+	        </div>
+	        <div class="row">
+	          <div class="col-md-3">Client Terms</div>
+	          <div class="col-md-9 padding-left">
+		          <div class="form-group" >
+		            <textarea 
+		            	name="client_terms"
+		            	placeholder="Do you have any prior work experience?"></textarea>
+		            
+	            </div>
+	          </div>
+	        </div>
+	        <div class="row">
+	          <div class="col-md-3">Candidate Terms</div>
+	          <div class="col-md-9 padding-left">
+		          <div class="form-group" >
+		          	<textarea 
+		          		name="candidate_terms"
+		          		placeholder="Do you have any prior work experience?"></textarea>
+		          	
+		          </div>
+	          </div>
+	        </div>
+	      </div>
+	      </div>
+	   		  
+	    </div>
+
+	   
+	    <!-- Candidate area -->
+	    <section id="candiate-tab" *ngIf="!orderTypeNew" [hidden]="!currentTab">
+	   		<div class="row requested-client">
+		    	<div class="col-md-4 cover">
+		    	<div class="requested-star-top">
+		    	<div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
+		    	<span><img src="../../../assets/avatar.png"></span>
+		    	<div class="requested-star">
+		    		<h5>abc</h5>
+		    		<ul>
+		    			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+		    			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+		    			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+		    			<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+		    			<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+		    		</ul>
+		    		<p>Requested</p>
+		    	</div>	
+		    	</div>	
+		    	<div class="requested-star-bottom">
+		    		<ul>
+		    			<li><i class="fa fa-download" aria-hidden="true"></i>Resume</li>
+		    			<li><i class="fa fa-clock-o" aria-hidden="true"></i>Extend</li>
+		    			<li><i class="fa fa-spinner" aria-hidden="true"></i>Swap</li>
+		    		</ul>
+		    	</div>
+		    	</div>
+		    	<div class="col-md-4 cover">
+		    	<div class="requested-star-top">
+		    		<div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
+		    		<span><img src="../../../assets/avatar.png"></span>
+		    	<div class="requested-star">
+		    		<h5>abc</h5>
+		    		<ul>
+		    			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+		    			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+		    			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+		    			<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+		    			<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+		    		</ul>
+		    		<p>Requested</p>
+		    	</div>
+		    	</div>		
+		    	<div class="requested-star-bottom">
+		    		<ul>
+		    			<li><i class="fa fa-download" aria-hidden="true"></i>Resume</li>
+		    			<li><i class="fa fa-clock-o" aria-hidden="true"></i>Extend</li>
+		    			<li><i class="fa fa-spinner" aria-hidden="true"></i>Swap</li>
+		    		</ul>
+		    	</div>
+		    	</div>
+		    	<div class="col-md-4 cover">
+		    	<div class="requested-star-top">
+		    		<div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
+		    		<span><img src="../../../assets/avatar.png"></span>
+		    	<div class="requested-star">
+		    		<h5>abc</h5>
+		    		<ul>
+		    			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+		    			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+		    			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+		    			<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+		    			<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+		    		</ul>
+		    		<p>Requested</p>
+		    	</div>	
+		    	</div>	
+		    	<div class="requested-star-bottom">
+		    		<ul>
+		    			<li><i class="fa fa-download" aria-hidden="true"></i>Resume</li>
+		    			<li><i class="fa fa-clock-o" aria-hidden="true"></i>Extend</li>
+		    			<li><i class="fa fa-spinner" aria-hidden="true"></i>Swap</li>
+		    		</ul>
+		    	</div>
+		    	</div>    	
+		    </div>
+		    <!-- 2nd row -->
+		    <div class="row requested-client">
+		    	<div class="col-md-4 cover">
+			    	<div class="requested-star-top">
+			    	<div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
+			    	<span><img src="../../../assets/avatar.png"></span>
+			    	<div class="requested-star">
+			    		<h5>abc</h5>
+			    		<ul>
+			    			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+			    			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+			    			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+			    			<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+			    			<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+			    		</ul>
+			    		<p>Requested</p>
+			    	</div>	
+			    	</div>	
+		    	<div class="requested-star-bottom">
+		    		<ul>
+		    			<li><i class="fa fa-download" aria-hidden="true"></i>Resume</li>
+		    			<li><i class="fa fa-clock-o" aria-hidden="true"></i>Extend</li>
+		    			<li><i class="fa fa-spinner" aria-hidden="true"></i>Swap</li>
+		    		</ul>
+		    	</div>
+		    	</div>
+		    </div>
+		    <div class="row add-candidates">
+			    <div class="col-md-12">
+		           <p>Add Candidates Manually</p>
+		        </div>
+	        </div>
+	    </section>
+
+  </section>
+  </form> 
+</div>
+</div>  
+</div>
+

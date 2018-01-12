@@ -1,0 +1,81 @@
+<!-- <router-outlet></router-outlet> -->
+<header class="container-fluid no-gutter top_bar" id="nav-section" [hidden]="!authStatus">
+    <div class="row">
+        <div class=" d-flex flex-row p-3 logo_block text-center">
+            <img src="../assets/logo_inner.png" alt="Logo" class="d-block logo_inner">
+        </div>
+        <div class="d-flex flex-row justify-content-end p-0 top_right ">
+            <div class="mr-auto align-self-center heading_text">{{title}}</div>
+            <div class="d-flex flex-row p-2 top_right_icons">
+                <a>
+                    <span class="m-1 lnr lnr-bubble align-self-center"></span>
+                </a>
+            </div>
+            <div class="d-flex flex-row p-2 top_right_icons">
+                <a>
+                    <span class="m-1 lnr lnr-alarm align-self-center"></span>
+                </a>
+            </div>
+            <div class="d-flex flex-row p-2 top_right_icons">
+                <a (click)="logout()">
+                    <img src="../assets/logout.svg"> </a>
+            </div>
+            <!-- <div class="d-flex flex-row p-2 top_right_icons"> <a class="user_profile"> <img src="../../../../assets/profile_img.png" alt="profile" /> </a> </div> -->
+        </div>
+    </div>
+</header>
+<div [ngClass]="{'content_section': authStatus }">
+    <div class="left_section h-100" [hidden]="!authStatus">
+        <ul class="nav flex-column side_menu">
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link disabled disable-click" routerLink="/login" routerLinkActive="active">
+                    <span class="lnr lnr-menu"></span> Menu </a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link disabled disable-click" routerLink="/login" routerLinkActive="active">
+                    <span class="lnr lnr-pie-chart"></span> Dashboard </a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link disabled disable-click" routerLink="/login" routerLinkActive="active">
+                    <span class="lnr lnr-laptop"></span> Reports </a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" routerLink="/orders" routerLinkActive="active">
+                    <span class="lnr lnr-layers"></span> Orders</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" routerLink="/clients" routerLinkActive="active">
+                    <span class="lnr lnr-user"></span> Clients</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" routerLink="/candidates">
+                    <span class="lnr lnr-users"></span> Candidates</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link disabled disable-click" routerLink="/login" [routerLinkActive]="['active']">
+                    <span class="lnr lnr-users"></span> Job Configuration</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link disabled" routerLink="/users" routerLinkActive="active">
+                    <span class="lnr lnr-users"></span> Users</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link disabled disable-click" routerLink="/login" routerLinkActive="active">
+                    <span class="lnr lnr-question-circle"></span> Help</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link disabled disable-click" routerLink="/login" routerLinkActive="active">
+                    <span class="lnr lnr-cog"></span> Settings</a>
+            </li>
+        </ul>
+    </div>
+    <div [ngClass]="{'right_section h-100': authStatus }">
+        <router-outlet></router-outlet>
+    </div>
+
+    <!-- <div class="right_section h-100">
+            <router-outlet></router-outlet>
+        </div> -->
+</div>
+
+<div class="loader" *ngIf="loader"></div>

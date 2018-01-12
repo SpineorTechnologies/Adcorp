@@ -1,0 +1,366 @@
+<section id="cangidate-grid">
+  <div class="container-fluid">
+    <form #f="ngForm" (ngSubmit)="save(f.value,f.valid)" role="form" novalidate>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row d-flex flex-row justify-content-end top_right_btns">
+            <a class="btn btn-light btn-sm my-2" routerLink="/candidates">Cancel</a>
+            <button class="btn btn-primary btn-sm my-2 mx-3" type="submit">Submit</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <!-- Header Button Section -->
+        <div class="col-md-2" id="profile-pic-section">
+          <div class="candida_pro_block">
+            <!-- <img src="{{candidate.picturePath}}" alt="" class="d-block" /> -->
+            <!-- <a class="change_img">Change picture</a> -->
+            <div class="profile-section">
+              <img [src]="profileImage" alt="" *ngIf="candidate.picture_path == null || candidate.picture_path == undefined || candidate.picture_path == ''"
+                [hidden]='pictureUpdated'>
+              <img [src]="candidate.picture_path" alt="" *ngIf="candidate.picture_path !=null || candidate.picture_path != undefined || candidate.picture_path !=''"
+                [hidden]='pictureUpdated'>
+              <img [src]="profileImage" [hidden]="!pictureUpdated">
+              <div class="edit-profile" (click)=triggerProfile()>Change Picture</div>
+            </div>
+            <input id="candidateProfile" type="file" accept="image/*" class="profile-image" name="file[0]" style="display:none" (change)="fileChangeEvent($event)">
+            <!-- <input type="file" name="profileImage" (change)="fileChangeEvent($event)" class="profile-image"> -->
+          </div>
+
+
+          <div class="d-flex star_rating flex-row justify-content-between mx-4 mt-3">
+            <div class="active">
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </div>
+            <div class="active">
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </div>
+            <div class="active">
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </div>
+            <div>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </div>
+            <div>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </div>
+          </div>
+
+          <div class="completed_status p-1 text-center my-3">0% Completed</div>
+
+          <div class="d-flex flex-row justify-content-around sum_text  ">
+            <div>0
+              <br>
+              <span>Orders</span>
+            </div>
+            <div>0hr
+              <br>
+              <span>Time</span>
+            </div>
+            <div>R0
+              <br>
+              <span>Payment</span>
+            </div>
+          </div>
+          <div class="resume-extension">
+            {{resumeFilename}}
+          </div>
+          <div class="btn btn-light btn-block btn-sm text-center mt-3 resume_btn" (click)="resumeTrigger()">Resume</div>
+          <input type="file" name="file[1]" id="resumeProfile" (change)="resumeFileChange($event)" style="display:none">
+        </div>
+
+
+
+        <!-- Form Section -->
+
+        <div class="col-md-10" id="form-section">
+
+
+          <div class="right_card p-4">
+            <div class="form-row">
+              <div class="col">
+                <label for="firstName">First Name</label>
+                <input [(ngModel)]="candidate.firstName" name="firstName" #firstName="ngModel" id="firstName" type="text" class="form-control form-control-sm"
+                  placeholder="First Name" required>
+                <label class="text-danger" [hidden]="firstName.valid || (firstName.pristine && ! f.submitted)">Firstname is required</label>
+              </div>
+              <div class="col">
+                <label for="lastName">Last Name</label>
+                <input [(ngModel)]="candidate.lastName" name="lastName" #lastName="ngModel" id="lastName" type="text" class="form-control form-control-sm"
+                  placeholder="Last Name" required>
+                <label class="text-danger" [hidden]="lastName.valid || (lastName.pristine && ! f.submitted)">Lastname is required</label>
+              </div>
+              <div class="col">
+                <label for="email">Email</label>
+                <input [(ngModel)]="candidate.email" name="email" #email="ngModel" id="email" type="email" class="form-control form-control-sm"
+                  placeholder="Email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+                <label class="text-danger" [hidden]="email.valid || (email.pristine && ! f.submitted)">Email is required</label>
+                <label class="text-danger" [hidden]="!email.hasError('pattern')">Enter Valid EMail</label>
+              </div>
+            </div>
+            <div class="form-row mt-3">
+              <div class="col">
+                <label for="phone">Phone</label>
+                <input [(ngModel)]="candidate.phone" name="phone" pattern="[0-9]{10}" #phone="ngModel" id="phone" type="phone" class="form-control form-control-sm"
+                  placeholder="Phone" required>
+                <label class="text-danger" [hidden]="phone.valid || (phone.pristine && ! f.submitted)">Phone No is required</label>
+              </div>
+              <div class="col">
+                <label for="africanId">ID Number</label>
+                <input [(ngModel)]="candidate.africanId" name="africanId" #africanId="ngModel" id="africanId" type="text" class="form-control form-control-sm"
+                  placeholder="ID Number" required>
+                <label class="text-danger" [hidden]="africanId.valid || (africanId.pristine && ! f.submitted)">African Id is required</label>
+              </div>
+              <div class="col">
+                <label for="dob">Date Of Birth</label>
+                <input class="form-control" [(ngModel)]="candidate.dob" name="dob" #dob="ngbDatepicker" id="dob" ngbDatepicker (click)="dob.toggle()"
+                  placeholder="mm/dd/yyyy">
+              </div>
+            </div>
+            <div class="form-row mt-3">
+              <div class="col">
+                <label for="address">Address</label>
+                <input [(ngModel)]="candidate.address" name="address" #address="ngModel" id="address" type="text" class="form-control form-control-sm"
+                  placeholder="Address">
+              </div>
+              <div class="col">
+                <label for="city">City</label>
+                <input [(ngModel)]="candidate.city" name="city" #city="ngModel" id="city" type="text" class="form-control form-control-sm"
+                  placeholder="City">
+              </div>
+              <div class="col">
+                <label for="state">State</label>
+                <input [(ngModel)]="candidate.state" name="state" #state="ngModel" id="state" type="text" class="form-control form-control-sm"
+                  placeholder="State">
+              </div>
+            </div>
+            <div class="form-row mt-3">
+              <div class="col">
+                <label for="country">Country</label>
+                <input [(ngModel)]="candidate.country" name="country" #country="ngModel" id="country" type="text" class="form-control form-control-sm"
+                  placeholder="Country">
+              </div>
+              <div class="col">
+                <label for="postalCode">Postal Code</label>
+                <input [(ngModel)]="candidate.postalCode" name="postalCode" #postalCode="ngModel" id="postalCode" type="text" class="form-control form-control-sm"
+                  placeholder="Postal Code">
+              </div>
+              <div class="col">
+                <label for="dummy"></label>
+              </div>
+            </div>
+
+            <div class="detail_header">
+              <h3>Professional Details</h3>
+            </div>
+
+            <div class="form-row mt-3" *ngFor="let userRole of roleDetails; let i=index;">
+              <div class="col">
+                <label for="role1">Role ({{i+1}})</label>
+                <input [(ngModel)]="userRole.roleTitle" [name]="'role-'+i" type="text" class="form-control form-control-sm" placeholder="Role">
+              </div>
+              <div class="col">
+                <label for="experience">Company Name</label>
+                <input [(ngModel)]="userRole.companyName" [name]="'company-'+i" type="text" class="form-control form-control-sm" placeholder="Company Name">
+              </div>
+              <div class="col">
+                <label for="rating">Start Date</label>
+                <!-- <label for="rating">Rating</label>
+                <input [(ngModel)]="userRole.rating" name="rating" #rating="ngModel" id="rating" type="email" class="form-control form-control-sm"
+                  placeholder="Rating"> -->
+                <input class="form-control" placeholder="yyyy-mm-dd" [name]="'startDate-'+i" [(ngModel)]="userRole.startDate" ngbDatepicker
+                  #startDate="ngbDatepicker" (click)="startDate.toggle()">
+              </div>
+              <div class="col">
+                <label for="rating">End Date</label>
+                <input class="form-control" placeholder="yyyy-mm-dd" [name]="'endDate-'+i" [(ngModel)]="userRole.endDate" ngbDatepicker #endDate="ngbDatepicker"
+                  (click)="endDate.toggle()" [hidden]="userRole.isCurrentEmployment">
+                <div class="form-control" [hidden]="!userRole.isCurrentEmployment">Present</div>
+              </div>
+              <div class="col working-input">
+                <label for="rating">
+                  <input [name]="'isCurrentEmployment-'+i" [(ngModel)]="userRole.isCurrentEmployment" type="checkbox" (change)="disableCurrentWork()">
+                  <span> Currently Working here</span>
+                </label>
+
+              </div>
+            </div>
+            <div class="text-primary my-3">
+              <a href="javascript:void(0)" (click)="addNewRole()">
+                <i class="fa fa-plus mr-1"></i>Add Another Role
+              </a>
+            </div>
+
+            <div class="form-row mt-3" *ngFor="let skills of skillDetails;let i=index;">
+              <div class="col">
+                <label for="skill1">Skills ({{i+1}})</label>
+                <input [(ngModel)]="skills.skills" [name]="'skills-'+i" type="text" class="form-control form-control-sm" placeholder="Skills">
+              </div>
+              <div class="col">
+                <label for="experience1">Experience</label>
+                <input [(ngModel)]="skills.yearsOfExperience" [name]="'experience-'+i" type="number" class="form-control form-control-sm"
+                  placeholder="Experience">
+              </div>
+              <div class="col">
+                <label for="ratings1">Ratings</label>
+                <input [(ngModel)]="skills.rating" [name]="'rating-'+i" type="text" class="form-control form-control-sm" placeholder="Ratings">
+              </div>
+            </div>
+            <!-- <div class="form-row mt-3">
+                    <div class="col">
+                      <label for="skill2">Skills (1)</label>
+                      <input id="skill2" type="text" class="form-control form-control-sm" placeholder="Skills">
+                    </div>
+                    <div class="col">
+                      <label for="experience2">Experience</label>
+                      <input id="experience2" type="text" class="form-control form-control-sm" placeholder="Experience">
+                    </div>
+                    <div class="col">
+                        <label for="ratings2">Ratings</label>
+                        <input id="ratings2" type="email" class="form-control form-control-sm" placeholder="Ratings">
+                      </div>
+                  </div> -->
+
+            <div class="text-primary my-3">
+              <a href="javascript:void(0)" (click)="addNewSkills()">
+                <i class="fa fa-plus mr-1"></i>Add Skills
+              </a>
+            </div>
+
+            <div class="form-row mt-3">
+              <div class="col">
+                <label for="mngVacation">Ability to Manage Vacations</label>
+                <select id="mngVacation" class="form-control form-control-sm">
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="dummy"></label>
+              </div>
+              <div class="col">
+                <label for="dummy"></label>
+              </div>
+            </div>
+
+            <div class="detail_header">
+              <h3>Banking</h3>
+            </div>
+
+            <div class="form-row mt-3">
+              <div class="col">
+                <label for="accType">Account Type</label>
+                <input [(ngModel)]="candidate.accountType" name="accountType" #accountType="ngModel" id="accType" type="text" class="form-control form-control-sm"
+                  placeholder="Account Type">
+              </div>
+              <div class="col">
+                <label for="accountNo">Account No</label>
+                <input [(ngModel)]="candidate.accountNo" name="accountNo" #accountNo="ngModel" id="accountNo" type="text" class="form-control form-control-sm"
+                  placeholder="Account No">
+              </div>
+              <div class="col">
+                <label for="bankName">Bank Name</label>
+                <input [(ngModel)]="candidate.bankName" name="bankName" #bankName="ngModel" id="bankName" type="email" class="form-control form-control-sm"
+                  placeholder="Bank Name">
+              </div>
+            </div>
+            <div class="form-row mt-3">
+              <div class="col">
+                <label for="branch">Branch</label>
+                <input [(ngModel)]="candidate.branch" name="branch" #branch="ngModel" id="branch" type="text" class="form-control form-control-sm"
+                  placeholder="Branch">
+              </div>
+              <div class="col">
+                <label for="bankCode">Bank Code</label>
+                <input [(ngModel)]="candidate.bankCode" name="bankCode" #bankCode="ngModel" id="bankCode" type="text" class="form-control form-control-sm"
+                  placeholder="Bank Code">
+              </div>
+              <div class="col">
+                <label for="dummy"></label>
+              </div>
+            </div>
+
+            <div class="detail_header">
+              <h3>Preference</h3>
+            </div>
+
+            <div class="form-row mt-3">
+              <div class="col">
+                <label for="location">Location</label>
+                <span class="pull-right">{{candidate.location}}</span>
+                <input type="range" min="1" max="25" class="form-control form-control-sm range-slider" [(ngModel)]="candidate.location" name="location"
+                  #location="ngModel" id="location">
+                <span class="pull-left">0</span>
+                <span class="pull-right">25</span>
+              </div>
+              <div class="col">
+                <label for="transportation">Transportation</label>
+                <select name="transportation" [(ngModel)]="candidate.transportation" class="form-control form-control-sm">
+                  <option value="Car">Bus</option>
+                  <option value="Bus">Car</option>
+                  <option value="Bus">Bike</option>
+                </select>
+
+
+              </div>
+              <div class="col">
+                <label for="dummy"></label>
+              </div>
+            </div>
+
+            <div class="detail_header">
+              <h3>License</h3>
+            </div>
+            <div *ngFor="let license of licenseDetails;let i=index;">
+              <div class="form-row mt-3">
+                <div class="col">
+                  <label for="licence">Licence</label>
+                  <input [(ngModel)]="license.license" [name]="'license-'+i" class="form-control form-control-sm" placeholder="Licence">
+                </div>
+                <div class="col">
+                  <label for="issuedBy">Issued By</label>
+                  <input [(ngModel)]="license.issuedBy" [name]="'issuedBy-'+i" type="text" class="form-control form-control-sm" placeholder="Issued By">
+                </div>
+                <div class="col">
+                  <label for="issuedDate">Issued Date</label>
+                  <!-- <input [(ngModel)]="license.issueDate" [name]="'issueDate-'+i" #issuedDate="ngModel" id="issuedDate" type="email" class="form-control form-control-sm"
+                    placeholder="Issued Date" date /> -->
+                  <!-- <p *ngIf="candidate.errors?.date">error message</p> -->
+                  <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="license.issueDate" [name]="'issueDate-'+i" #issueDate="ngbDatepicker"
+                    ngbDatepicker (click)="issueDate.toggle()">
+
+                </div>
+              </div>
+              <div class="form-row mt-3">
+                <div class="col">
+                  <label for="expDate">Expiry Date</label>
+                  <!-- <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" date/>
+                  <p *ngIf="field.errors?.date">error message</p> -->
+                  <!-- <input [(ngModel)]="license.expiryDate" [name]="'expiryDate-'+i" #expDate="ngModel" id="expDate" type="text" class="form-control form-control-sm"
+                    placeholder="Expiry Date" date /> -->
+                  <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="license.expiryDate" [name]="'expiryDate-'+i" #expiryDate="ngbDatepicker"
+                    ngbDatepicker (click)="expiryDate.toggle()">
+
+                </div>
+                <div class="col">
+                  <label for="dummy"></label>
+                </div>
+                <div class="col">
+                  <label for="dummy"></label>
+                </div>
+              </div>
+            </div>
+            <div class="text-primary my-3">
+              <a href="javascript:void(0)" (click)="addNewLicense()">
+                <i class="fa fa-plus mr-1"></i>Add More License
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+  </div>
+</section>

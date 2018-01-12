@@ -1,0 +1,202 @@
+<!-- ACTIONS -->
+<!-- <section id="action" class="py-4 mb-4 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPostModal">
+            <i class="fa fa-plus"></i> Add Post
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section> -->
+
+<!-- POSTS -->
+<section id="cangidate-grid">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card content_card">
+          <div class="card-header">
+            <!-- <div class="d-flex flex-row justify-content-between">
+                    <div class="p-1 col"><a routerLink="/candidates/new"><h5 class="display-5"><i class="fa fa-plus-circle"></i> Add Candidate</h5></a></div>
+                </div>                
+                <div class="px-5 w-50">                   
+                </div> -->
+            <div class="card_title">
+              <a routerLink='/order/new'>
+                <i class="fa fa-plus-circle"></i> &nbsp; Add Order</a>
+            </div>
+            <ul class="card_actions list-inline">
+              <li>
+                <a>
+                  <img src="../../../../assets/column.png" /> </a>
+              </li>
+              <li>
+                <a (click)="clearSearch()">
+                  <img src="../../../../assets/clear_filter.png" /> </a>
+              </li>
+            </ul>
+          </div>
+          <!-- <table class="table">
+              <thead class="table-headder">
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>No of Jobs</th>
+                  <th>Phone</th>
+                  <th>Device Information</th>
+                  <th>Registered Date</th>
+                  <th>Days old since Registered</th>
+                  <th>Last Time Profile Update</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let c of candidates$?.data">
+                  <td>{{c.firstName}}</td>
+                  <td>{{c.lastName}}</td>
+                  <td>{{c.noOfJobs}}</td>
+                  <td>{{c.phone}}</td>
+                  <td>{{c.deviceModel}}</td>
+                  <td>{{c.createdDateTime}}</td>
+                  <td>{{c.firstName}}</td>
+                  <td>{{c.lastUpdatedDateTime}}</td>
+                  <td>{{c.activeStatus}}</td>
+                  <td>
+                    <a [routerLink]="['/candidates/', c._id]"><i class="fa fa-edit mx-1"></i></a>
+                    <a (click)="delete(c)"><i class="fa fa-trash mx-1"></i></a>
+                     <i class="fa fa-comment mx-1"></i> 
+                   </td>
+                </tr>
+              </tbody>
+            </table> -->
+
+          <div class="card_content">
+            <table border="0" class="table content_table" [mfData]="orders | ordersFilter : filterQuery1 : filterQuery2 : filterQuery3 : filterQuery4 : filterQuery5 : filterQuery6 : filterQuery7"
+              #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+              <thead>
+                <tr>
+
+                  <th>
+                    <mfDefaultSorter by="_id">Order ID</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="roleTitle">Job Title</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="cli_Id">Client Id</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="o_count">No. of Candidates</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="jobStartDate">Start Date</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="daysOfJob">No of Days</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="o_pay_scale">Billing Rate</mfDefaultSorter>
+                  </th>
+                  <th>
+                    Aging
+                  </th>
+                  <th>
+                    Order Status
+                  </th>
+                  <th class="action_btn">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery1" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery2" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery3" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery4" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery5" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery6" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery7" placeholder="Search" />
+                  </td>
+                  <td>
+
+                  </td>
+                  <td>
+                    <!-- <input class="form-control" [(ngModel)]="filterQuery" placeholder="Search"/> -->
+                  </td>
+                  <td>
+                    <!-- <input class="form-control" [(ngModel)]="filterQuery" placeholder="Search"/> -->
+                  </td>
+                </tr>
+                <tr *ngFor="let o of mf.data">
+                  <td>{{o._id}}</td>
+                  <td>{{o.roleTitle}}</td>
+                  <td>{{o.clientName}}</td>
+                  <td>{{o.o_count}}</td>
+                  <td>{{o.jobStartDate}}</td>
+                  <td class="dayJob">{{o.daysOfJob}}</td>
+                  <td>{{o.o_pay_scale}}</td>
+                  <td>{{o.aging}}</td>
+                  <td>{{o.o_activeStatus}}</td>
+                  <td>
+                    <a [routerLink]="['/order/', o._id]">
+                      <i class="fa fa-edit mx-1"></i>
+                    </a>
+                    <a (click)="openDeletePopup(content,o)">
+                      <i class="fa fa-trash mx-1"></i>
+                    </a>
+                    <!-- <i class="fa fa-comment mx-1"></i> -->
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="8">
+                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Remove Order</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure want to remove Order ?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">No</button>
+    <button type="button" class="btn btn-outline-dark" (click)="delete()">Yes</button>
+  </div>
+</ng-template>

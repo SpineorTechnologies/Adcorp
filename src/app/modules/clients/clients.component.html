@@ -1,0 +1,193 @@
+<section id="cangidate-grid">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card content_card">
+          <div class="card-header">
+            <div class="card_title">
+              <a href="javascript:void(0)" routerLink="/clients/new">
+                <i class="fa fa-plus-circle cursorPointer"></i> &nbsp; Add Client</a>
+            </div>
+
+            <ul class="card_actions list-inline">
+              <li>
+                <a>
+                  <img src="../../../../assets/column.png" /> </a>
+              </li>
+              <li>
+                <a (click)="clearSearch()">
+                  <img src="../../../../assets/clear_filter.png" /> </a>
+              </li>
+            </ul>
+          </div>
+          <!-- <table class="table">
+                <thead class="table-headder">
+                    <tr>
+                      <th>Client Name</th>
+                      <th>Client Id</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Designation</th>
+                      <th>Role</th>
+                      <th>Access</th>
+                      <th>Location</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let c of client$?.data">
+                      <td>{{c.clientName}}</td>
+                      <td>{{c.clientId}}</td>
+                      <td>{{c.firstName}}</td>
+                      <td>{{c.lastName}}</td>
+                      <td>{{c.designation}}</td>
+                      <td>{{c.role}}</td>
+                      <td>{{c.access}}</td>
+                      <td>{{c.location}}</td>
+                      <td>{{c.activeStatus}}</td>
+                      <td>
+                        <a [routerLink]="['/clients/', c._id]"><i class="fa fa-edit mx-1"></i></a>
+                        <a (click)="delete(c)"><i class="fa fa-trash mx-1"></i></a>
+                        <!-- <i class="fa fa-comment mx-1"></i> 
+                      </td>
+                    </tr>
+                  </tbody>
+              </table> -->
+          <div class="card_content">
+            <table class="table content_table" [mfData]="clients | candidateFilter : filterQuery1 : filterQuery2 : filterQuery3 : filterQuery4 : filterQuery5 : filterQuery6 : filterQuery7 : filterQuery8"
+              #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+              <thead>
+                <tr>
+                  <th>
+                    <mfDefaultSorter by="clientName">Client Name</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="clientId">Client Id</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="firstName">First Name</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="lastName">Last Name</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="designation">Designation</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="role">Role</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="access">Access</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="location">Location</mfDefaultSorter>
+                  </th>
+                  <th>
+                    Status
+                  </th>
+                  <th>
+                    Actions
+                  </th>
+                </tr>
+
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery1" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery2" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery3" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery4" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery5" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery6" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery7" placeholder="Search" />
+                  </td>
+                  <td>
+                    <input class="form-control search_ip" [(ngModel)]="filterQuery8" placeholder="Search" />
+                  </td>
+                  <td>
+                    <!-- <input class="form-control" [(ngModel)]="filterQuery" placeholder="Search"/> -->
+                  </td>
+                  <td>
+                    <!-- <input class="form-control" [(ngModel)]="filterQuery" placeholder="Search"/> -->
+                  </td>
+                </tr>
+                <tr *ngFor="let c of mf.data">
+                  <td>
+                    <a>{{c.clientName}}</a>
+                  </td>
+                  <td>
+                    <a>{{c.clientId}}</a>
+                  </td>
+                  <td>
+                    <a [routerLink]="['/clients/', c._id]">{{c.firstName}}</a>
+                  </td>
+                  <td>
+                    <a [routerLink]="['/clients/', c._id]">{{c.lastName}}</a>
+                  </td>
+                  <td>{{c.designation}}</td>
+                  <td>{{c.role}}</td>
+                  <td>{{c.access}}</td>
+                  <td>{{c.location}}</td>
+                  <td>
+                    <label class="switch">
+                      <input type="checkbox" [(ngModel)]="c.activeStatus" (change)="onActiveStatusChange($event, c._id)" />
+                      <span class="slider round"></span>
+                    </label>
+                  </td>
+                  <td>
+                    <!-- <a [routerLink]="['/candidates/', c._id]"><i class="fa fa-edit mx-1"></i></a> -->
+                    <a (click)="openDeletePopup(content,c)">
+                      <i class="fa fa-trash mx-1"></i>
+                    </a>
+                    <!-- <i class="fa fa-comment mx-1"></i> -->
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="10">
+                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Remove Client</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure want to remove client ?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">No</button>
+    <button type="button" class="btn btn-outline-dark" (click)="delete(c)">Yes</button>
+  </div>
+</ng-template>

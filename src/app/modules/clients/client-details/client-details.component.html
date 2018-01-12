@@ -1,0 +1,242 @@
+<!-- Navigation section -->
+
+<div class="container-fluid no-gutter bg-darkgrey">
+  <form #f="ngForm" (ngSubmit)="save(f.value)" enctype="multipart/form-data">
+    <div class="row">
+      <!-- Header Button Section -->
+
+      <div class="col-md-2 mt-5" id="profile-pic-section">
+
+        <div class="profile-section">
+          <img [src]="companyLogo" alt="" *ngIf="client.resume_path == null || client.resume_path == undefined || client.resume_path == ''"
+            [hidden]='clientCompanyUpdated'>
+          <img [src]="client.resume_path" alt="" *ngIf="client.resume_path !=null || client.resume_path != undefined || client.resume_path !=''"
+            [hidden]='clientCompanyUpdated'>
+          <img [src]="companyLogo" [hidden]="!clientCompanyUpdated">
+          <div class="edit-profile" (click)=triggerCompanyUrl()>Change Logo</div>
+        </div>
+        <div class="profile-section">
+          <img [src]="profileImage" alt="" *ngIf="client.picture_path == null || client.picture_path == undefined || client.picture_path == ''"
+            [hidden]='pictureUpdated'>
+          <img [src]="client.picture_path" alt="" *ngIf="client.picture_path !=null || client.picture_path != undefined || client.picture_path !=''"
+            [hidden]='pictureUpdated'>
+          <img [src]="profileImage" [hidden]="!pictureUpdated">
+          <div class="edit-profile" (click)=triggerProfile()>Change Picture</div>
+        </div>
+        <input id="candidateProfile" type="file" accept="image/*" class="profile-image" name="file[0]" style="display:none" (change)="fileChangeEvent($event)">
+        <input id="resumeProfile" type="file" accept="image/*" class="profile-image" name="file[1]" style="display:none" (change)="companylogoUpload($event)">
+        <div class="d-flex flex-row justify-content-between mx-4 mt-3">
+          <div>
+            <i class="fa fa-star" aria-hidden="true"></i>
+          </div>
+          <div>
+            <i class="fa fa-star" aria-hidden="true"></i>
+          </div>
+          <div>
+            <i class="fa fa-star" aria-hidden="true"></i>
+          </div>
+          <div>
+            <i class="fa fa-star" aria-hidden="true"></i>
+          </div>
+          <div>
+            <i class="fa fa-star" aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <div class="profile-status p-1 text-center m-3">75% Completed</div>
+
+        <div class="d-flex flex-row justify-content-around text-primary">
+          <div>145</div>
+          <div>2043hr</div>
+          <div>R75.2</div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-around">
+          <div>Orders</div>
+          <div>Time</div>
+          <div>Payment</div>
+        </div>
+      </div>
+
+      <!-- Form Section -->
+
+      <div class="col-md-10" id="form-section">
+        <div class="row d-flex flex-row justify-content-end">
+          <a class="btn btn-light btn-sm my-2" routerLink="/clients">Cancel</a>
+          <button class="btn btn-primary btn-sm my-2 mx-3" type="submit">Submit</button>
+        </div>
+
+        <div class="bg-white p-4">
+          <div class="form-row">
+            <div class="col">
+              <label for="firstName">First Name</label>
+              <input [(ngModel)]="client.firstName" name="firstName" #firstName="ngModel" id="firstName" type="text" class="form-control form-control-sm"
+                placeholder="First name" required>
+              <label class="text-danger" [hidden]="firstName.valid || (firstName.pristine && ! f.submitted)">Firstname is required</label>
+            </div>
+            <div class="col">
+              <label for="lName">Last Name</label>
+              <input [(ngModel)]="client.lastName" name="lastName" #lastName="ngModel" id="lName" type="text" class="form-control form-control-sm"
+                placeholder="Last name" required>
+              <label class="text-danger" [hidden]="lastName.valid || (lastName.pristine && ! f.submitted)">Lastname is required</label>
+            </div>
+            <div class="col">
+              <label for="email">Email</label>
+              <input [(ngModel)]="client.email" name="email" #email="ngModel" id="email" type="email" class="form-control form-control-sm"
+                placeholder="Email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+              <label class="text-danger" [hidden]="email.valid || (email.pristine && ! f.submitted)">Email is required</label>
+              <label class="text-danger" [hidden]="!email.hasError('pattern')">Enter Valid EMail</label>
+            </div>
+          </div>
+          <div class="form-row mt-3">
+            <div class="col">
+              <label for="phone">Phone</label>
+              <input [(ngModel)]="client.phone" name="phone" pattern="[0-9]{10}" #phone="ngModel" id="phone" type="phone" class="form-control form-control-sm"
+                placeholder="Phone" required>
+              <label class="text-danger" [hidden]="phone.valid || (phone.pristine && ! f.submitted)">Phone No is required</label>
+            </div>
+            <div class="col">
+              <label for="clientName">Client Name</label>
+              <input [(ngModel)]="client.clientName" name="clientName" #clientName="ngModel" id="clientName" type="text" class="form-control form-control-sm"
+                placeholder="Client Name" required>
+              <label class="text-danger" [hidden]="clientName.valid || (clientName.pristine && ! f.submitted)">Client Name is required</label>
+            </div>
+            <div class="col">
+              <label for="clientId">Client ID</label>
+              <input [(ngModel)]="client.clientId" name="clientId" #clientId="ngModel" id="clientId" type="text" class="form-control form-control-sm"
+                placeholder="Client ID" required>
+              <label class="text-danger" [hidden]="clientId.valid || (clientId.pristine && ! f.submitted)">Client ID is required</label>
+            </div>
+          </div>
+          <div class="form-row mt-3">
+            <div class="col">
+              <label for="designation">Designation</label>
+              <input [(ngModel)]="client.designation" name="designation" #designation="ngModel" id="designation" type="text" class="form-control form-control-sm"
+                placeholder="Designation">
+            </div>
+            <div class="col">
+              <label for="role">Role</label>
+              <select id="role" class="form-control form-control-sm">
+                <option>role 1</option>
+                <option>role 2</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="access">Access</label>
+              <select id="access" class="form-control form-control-sm">
+                <option>Access 1</option>
+                <option>Access 2</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="alert alert-light my-3">
+            <strong>Location</strong>
+          </div>
+          <div *ngFor="let location of locationDetails;let i=index;">
+            <p>Location ({{i+1}})</p>
+            <div class="form-row mt-3">
+              <div class="col">
+                <label for="division">Division</label>
+                <input [(ngModel)]="location.division" [name]="'division-'+i" type="text" class="form-control form-control-sm" placeholder="Division">
+              </div>
+              <div class="col">
+                <label for="address">Address</label>
+                <input [(ngModel)]="location.address" [name]="'address-'+i" type="text" class="form-control form-control-sm" placeholder="Address">
+              </div>
+              <div class="col">
+                <label for="locality">Locality</label>
+                <input [(ngModel)]="location.locality" [name]="'locality-'+i" type="text" class="form-control form-control-sm" placeholder="Locality">
+              </div>
+            </div>
+            <div class="form-row mt-3">
+              <div class="col">
+                <label for="city">City</label>
+                <input [(ngModel)]="location.city" [name]="'city-'+i" type="text" class="form-control form-control-sm" placeholder="City">
+              </div>
+              <div class="col">
+                <label for="city">State</label>
+                <input [(ngModel)]="location.state" [name]="'state-'+i" type="text" class="form-control form-control-sm" placeholder="State">
+              </div>
+              <div class="col">
+                <label for="postalCode">Postal Code</label>
+                <input [(ngModel)]="location.postalCode" [name]="'postalCode-'+i" type="text" class="form-control form-control-sm" placeholder="Postal Code">
+              </div>
+            </div>
+            <div class="form-row mt-3">
+              <div class="col">
+                <label for="contact">Contact</label>
+                <input [(ngModel)]="location.contact" [name]="'contact-'+i" type="text" class="form-control form-control-sm" placeholder="Contact">
+              </div>
+            </div>
+          </div>
+          <div class="text-primary my-3">
+            <a href="javascript:void(0)" (click)="addNewLocation()">
+              <i class="fa fa-plus mr-1"></i>Add More Location
+            </a>
+          </div>
+
+          <div class="alert alert-light my-3">
+            <strong>Payment</strong>
+          </div>
+
+          <div class="form-row mt-3">
+            <div class="col">
+              <label for="payType">Payment Type</label>
+              <select name="payType" [(ngModel)]="client.payType" name="payType" #payType="ngModel" id="payType" class="form-control form-control-sm">
+                <option value="credit card">Credit Card</option>
+                <option value="eft">EFT</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="cardNo">Card Number</label>
+              <input [(ngModel)]="client.cardNo" name="cardNo" #cardNo="ngModel" id="cardNo" type="text" class="form-control form-control-sm"
+                placeholder="Card Number">
+            </div>
+            <div class="col">
+              <label for="expDate">Expiration Date</label>
+              <input [(ngModel)]="client.expDate" name="expDate" #expDate="ngModel" id="expDate" type="text" class="form-control form-control-sm"
+                placeholder="Expiration Date">
+            </div>
+          </div>
+          <div class="form-row mt-3">
+            <div class="col">
+              <label for="cardType">Card Type</label>
+              <select name="cardType" [(ngModel)]="client.cardType" name="cardType" #cardType="ngModel" id="cardType" class="form-control form-control-sm">
+                <option value="mastero">Mastero</option>
+                <option value="visa">Visa</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="bank">Bank</label>
+              <input [(ngModel)]="client.bank" name="bank" #bank="ngModel" id="bank" type="text" class="form-control form-control-sm" placeholder="Bank Name">
+            </div>
+            <div class="col">
+              <label for="branch">Branch</label>
+              <input [(ngModel)]="client.branch" name="branch" #branch="ngModel" id="branch" type="email" class="form-control form-control-sm"
+                placeholder="Branch">
+            </div>
+          </div>
+
+          <div class="alert alert-light my-3">
+            <strong>Recommended Orders</strong>
+          </div>
+
+          <div class="form-row mt-3">
+            <div class="col">
+              <label for="role">Role</label>
+              <input [(ngModel)]="client.role" name="role" #role="ngModel" id="role" type="text" class="form-control form-control-sm" placeholder="Role">
+            </div>
+            <div class="col">
+              <a>
+                <i class="fa fa-cog"></i> Configure</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </form>
+</div>

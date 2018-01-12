@@ -1,0 +1,201 @@
+.right_card {
+    background-color: #fff;
+    overflow-y: scroll;
+    border: 1px solid #dddddd;
+    height: 815px;
+}
+
+.detail_header {
+    background-color: #eee;
+    padding: 10px 10px;
+    margin: 30px 0;
+}
+
+.detail_header>h3 {
+    font-size: 18px;
+    margin-bottom: 0;
+    color: #212121;
+}
+
+.candida_pro_block {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.change_img {
+    position: absolute;
+    bottom: 0;
+    padding: 5px;
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, .3);
+    color: #fff!important;
+    font-size: 13px;
+    width: 100%;
+}
+
+.star_rating>div>i {
+    color: #999;
+    font-size: 16px;
+    padding: 0 3px;
+}
+
+.star_rating>div.active>i {
+    color: #f1c50c;
+}
+
+.completed_status {
+    width: 100%;
+    background-color: #dddddd;
+    border-radius: 50px;
+}
+
+.sum_text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #3fbbde;
+    text-align: center;
+}
+
+.sum_text>div>span {
+    color: #212121;
+}
+
+.resume_btn {
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    background-color: #fff!important;
+}
+
+.right_card>.form-row>.col,
+.right_card>.form-row>[class*="col-"] {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.top_right_btns {
+    margin: 5px 0;
+}
+
+.candida_pro_block>img {
+    width: 100%;
+}
+
+.profile-section {
+    position: relative;
+}
+
+.profile-section>img {
+    height: 160px;
+    width: 160px;
+    margin: 0;
+}
+
+.profile-section .edit-profile {
+    position: absolute;
+    bottom: 0;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    width: 160px;
+}
+
+.working-input label {
+    position: relative;
+    display: block;
+}
+
+.working-input span {
+    position: absolute;
+    left: 20px;
+    right: 0;
+    top: 14px;
+}
+
+.working-input input {
+    position: absolute;
+    left: 0;
+    top: 28px;
+}
+
+.resume-extension {
+    text-align: center;
+    margin: 10px 0px -10px;
+}
+
+@media only screen and (max-width: 1920px) {
+    // .right_card{ height: 700px;}  
+}
+
+@media only screen and (max-width: 1366px) {
+    .right_card {
+        height: 500px;
+    }
+}
+
+// #menu-section {
+//     min-height: 600px;
+//     height: auto;
+//     ul {
+//         list-style-type: none;
+//         margin: 0;
+//         padding: 0;
+//         color: $bac-color;
+//     }
+//     li a {
+//         display: block;
+//         color: $bac-color;
+//     }
+//     li a:hover {
+//         background-color: #555;
+//         color: white;
+//     }
+//     .active {
+//         background-color: #555;
+//         color: white;
+//     }
+// }
+//  .main-bg-color{
+//     background-color: $bac-color;
+//  }
+// .bg-white {
+//     background-color: white;
+//     min-height: 600px;
+//     height: auto;
+// }
+// .bg-darkgrey {
+//     background-color: $bac-color;
+// }
+// #nav-section{
+//     border: $border-color 2px solid;
+//     border-bottom-style: ridge;
+//     .border-right{
+//         border-right: $border-color 2px solid;
+//         border-right-style: ridge;
+//     }
+//     .border-left{
+//         border-left: $border-color 2px solid;
+//         border-left-style: ridge;
+//     }
+// }
+// #cangidate-grid {
+//     font-size: small;
+// }
+// .table-headder{
+//     background-color: $primary-color;
+//     color: $font-color;
+// }
+// .alert-light {
+//     background-color: $bac-color
+// }
+// .profile-status{
+//     background-color: rgb(161, 160, 160);
+//     border-radius: 20px;
+// }
